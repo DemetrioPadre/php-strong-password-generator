@@ -2,15 +2,27 @@
 
 
 
-$password_lenght = (int) $_GET['password-lenght'] ?? 0;
-
-
+$password_lenght = (int) $_GET['password-lenght'] ?? 5;
 
 //controllare sempre se il form è vuoto
 $form_sent = !empty($_GET);
+
+//funzione
 if ($form_sent) {
-    $array_caratteri = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_+=';
-    var_dump($array_caratteri);
+    $generate_password = "";
+
+    //creiamo un ciclo per la stampa
+
+    for ($i = 0; $i < $password_lenght; $i++) {
+        //dichiarazione caratteri in una stringa poichè in array non riesco
+        $string_caratteri = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_+=';
+        //recuperiamo un carattere a caso
+        $rand_caratt_ind = rand(0, strlen($string_caratteri) - 1);
+        $rand_caratts = $string_caratteri[$rand_caratt_ind];
+        // var_dump($rand_caratts); cosi controllo se mi stampa random il carattere
+        $generate_password .= $rand_caratts;
+    }
+    var_dump($generate_password);
 };
 
 
