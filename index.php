@@ -1,19 +1,12 @@
 <?php
+function generate_password($length)
+{
 
-
-
-$password_lenght = (int) $_GET['password-lenght'] ?? 5;
-
-//controllare sempre se il form è vuoto
-$form_sent = !empty($_GET);
-
-//funzione
-if ($form_sent) {
     $generate_password = "";
 
     //creiamo un ciclo per la stampa
 
-    for ($i = 0; $i < $password_lenght; $i++) {
+    for ($i = 0; $i < $length; $i++) {
         //dichiarazione caratteri in una stringa poichè in array non riesco
         $string_caratteri = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_+=';
         //recuperiamo un carattere a caso
@@ -22,6 +15,18 @@ if ($form_sent) {
         // var_dump($rand_caratts); cosi controllo se mi stampa random il carattere
         $generate_password .= $rand_caratts;
     }
+    return $generate_password;
+};
+
+
+$password_length = (int) $_GET['password-length'] ?? 5;
+
+//controllare sempre se il form è vuoto
+$form_sent = !empty($_GET);
+
+//funzione
+if ($form_sent) {
+    $generate_password = generate_password($password_length);
     var_dump($generate_password);
 };
 
@@ -51,8 +56,8 @@ if ($form_sent) {
     <div class="container mt-5 mx-5">
         <h1>BENVENUTI NEL GENERATORE DI PASSWORD PIù SICURO AL MONDO</h1>
         <form action="index.php" method="GET" class="row">
-            <div class="col-10"><label for="password-lenght" class="form-label">Generiamo la tua password </label>
-                <input type="number" class="form-control" id="password-lenght" name="password-lenght" value="password-lenght" min="1" max="16">
+            <div class="col-10"><label for="password-length" class="form-label">Generiamo la tua password </label>
+                <input type="number" class="form-control" id="password-length" name="password-length" value="password-length" min="1" max="16">
             </div>
             <div class="col-2"> <button type="submit" class="btn btn-primary mt-4 w-100">GENERA</button></div>
 
